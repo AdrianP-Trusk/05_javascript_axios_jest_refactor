@@ -1,6 +1,6 @@
 const createNewTodo = require("../../src/api-requests/jsonplaceholder/createNewTodo")
-
-const axios = require("axios").default
+const listTodos = require("../../src/api-requests/jsonplaceholder/listTodos")
+const getTodoById = require("../../src/api-requests/jsonplaceholder/getTodoById")
 
 describe("I am a jsonplaceholder user", () => {
     describe("When I create a new Todo item", () => {
@@ -19,9 +19,7 @@ describe("I am a jsonplaceholder user", () => {
     describe("When I list existing todos", () => {
         let listTodosResponse
         beforeAll(async () => {
-            listTodosResponse = await axios.get(
-                "https://jsonplaceholder.typicode.com/todos",
-            )
+            listTodosResponse = await listTodos()
         })
         it("Should respond with code 200 (Ok)", () => {
             expect(listTodosResponse.status).toBe(200)
@@ -36,9 +34,7 @@ describe("I am a jsonplaceholder user", () => {
     describe("When I get existing todo by id (1)", () => {
         let listTodosResponse
         beforeAll(async () => {
-            listTodosResponse = await axios.get(
-                "https://jsonplaceholder.typicode.com/todos/1",
-            )
+            listTodosResponse = await getTodoById(1)
         })
         it("Should respond with code 200 (Ok)", () => {
             expect(listTodosResponse.status).toBe(200)
